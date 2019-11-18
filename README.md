@@ -1,1 +1,3 @@
-### 基于Typescript重构Axios插件,仅支持浏览器环境下使用. ____Power By 黄佚
+# axios
+
+axios-ts
