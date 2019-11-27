@@ -1,5 +1,5 @@
 // 0502课
-import { isDate, isObject } from './utils'
+import { isDate, isPlainObject } from './utils'
 
 function encode(val: string): string {
   // 对对象编码 但对特殊字符转译回来
@@ -36,7 +36,7 @@ export function buildURL(url: string, params?: any): string {
       // 判断是否是日期或对象类型
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)
