@@ -65,11 +65,41 @@ axios({
     a:1,
     b:2
   }
+}).then(res=>{
+  console.log(res)
 })
 
-const arr = new Int32Array([21,31])
 axios({
   method:'post',
-  url:'/base/buffer',
-  data:arr
+  url:'/base/post',
+  headers:{
+    'content-type':'application/json',
+    'Accept':'application/json, text/plain, */*'
+  },
+  data:{
+    a:1,
+    b:2
+  }
+}).then(res=>{
+  console.log(res)
 })
+
+// 使用URLSearchParams后 会将请求的参数转换成formData的形式
+// XHR中会针对formData的数据格式自动选择合适的headers类型
+// 本demo中的headers为Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+const paramsString = 'q=URLUtils.searchParams&topic=api'
+const searchParams = new URLSearchParams(paramsString);
+axios({
+  method:'post',
+  url:'/base/post',
+  data:searchParams
+}).then(res=>{
+  console.log(res)
+})
+
+// const arr = new Int32Array([21,31])
+// axios({
+//   method:'post',
+//   url:'/base/buffer',
+//   data:arr
+// })
