@@ -9,7 +9,7 @@ export default class Axios {
     return this._requestMethodWithoutData('get', url, config)
   }
   delete(url: string, config?: AxiosRequestConfig): AxiosPromise {
-    return this._requestMethodWithoutData('delte', url, config)
+    return this._requestMethodWithoutData('delete', url, config)
   }
   head(url: string, config?: AxiosRequestConfig): AxiosPromise {
     return this._requestMethodWithoutData('head', url, config)
