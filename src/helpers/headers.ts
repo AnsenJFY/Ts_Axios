@@ -1,5 +1,6 @@
-import { isPlainObject } from './utils'
+import { isPlainObject, deepMerge } from './utils'
 import { parse } from 'path'
+import { Method } from '../types'
 function nomalizeHeaderName(headers: any, nomalizeHeaderName: string): void {
   // 实现Content-Type大小写的规范化
   if (!headers) {
@@ -52,4 +53,19 @@ export function parseHeaders(headers: string): any {
     parsed[key] = val
   })
   return parsed
+}
+
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) {
+    return headers
+  }
+  headers = deepMerge(headers.common, headers[method], headers)
+
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+
+  methodsToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

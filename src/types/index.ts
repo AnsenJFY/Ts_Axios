@@ -26,6 +26,8 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+  // 可选索引签名
+  [propName: string]: any
 }
 
 // 在接口中添加泛型参数T 使得响应的时候可以推断出对应的类型
@@ -49,6 +51,7 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  defaults: AxiosRequestConfig
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
