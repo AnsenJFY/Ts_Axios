@@ -97,6 +97,7 @@ export interface AxiosTransformer {
 }
 
 // 1002 取消功能的接口定义
+// 实例类型
 export interface CancelToken {
   promise: Promise<string>
   reason?: string
@@ -108,4 +109,15 @@ export interface Canceler {
 
 export interface CancelExecutor {
   (cancle: Canceler): void
+}
+
+export interface CancelTokenSource {
+  token: CancelToken
+  cancel: Canceler
+}
+
+// 类类型:定义了类和类的属性
+export interface CancelTokenStatic {
+  new (executor: CancelExecutor): CancelToken
+  source(): CancelTokenSource
 }
