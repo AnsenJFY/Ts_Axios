@@ -1,6 +1,12 @@
 // 0502课
 import { isDate, isPlainObject } from './utils'
 
+// XSRF
+interface URLOrigin {
+  protocol: string
+  host: string
+}
+
 function encode(val: string): string {
   // 对对象编码 但对特殊字符转译回来
   return encodeURIComponent(val)
@@ -55,4 +61,24 @@ export function buildURL(url: string, params?: any): string {
   }
 
   return url
+}
+
+// XSRF
+export function isURLSameOrigin(requestURL: string): boolean {
+  const parsedOrigin = resolveURL(requestURL)
+  return (
+    parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host
+  )
+}
+
+const urlParsingNode = document.createElement('a')
+const currentOrigin = resolveURL(window.location.href)
+
+function resolveURL(url: string): URLOrigin {
+  urlParsingNode.setAttribute('href', url)
+  const { protocol, host } = urlParsingNode
+  return {
+    protocol,
+    host
+  }
 }
