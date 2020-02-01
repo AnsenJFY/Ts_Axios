@@ -29,6 +29,7 @@ export interface AxiosRequestConfig {
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken
+  withCredentials?: boolean
   // 可选索引签名
   [propName: string]: any
 }
