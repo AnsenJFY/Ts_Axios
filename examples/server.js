@@ -210,4 +210,9 @@ function registerMoreRouter(){
       res.end('UnAuthorization')
     }
   })
+  // 自定义合法授权码
+  router.get('/more/304',function(req,res){
+    res.status(304)
+    res.end()
+  })
 }
