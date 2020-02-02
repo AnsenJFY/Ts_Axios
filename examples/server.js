@@ -215,4 +215,11 @@ function registerMoreRouter(){
     res.status(304)
     res.end()
   })
+  // 静态方法拓展
+  router.get('/more/A', function(req,res){
+    res.end('A')
+  })
+  router.get('/more/B', function(req,res){
+    res.end('B')
+  })
 }
