@@ -1,5 +1,6 @@
 import axios from '../../src/index'
 import { AxiosError } from '../../src/helpers/error'
+import qs from 'qs'
 // import 'nprogress/nprogress.css'
 // import NProgress from 'nprogress'
 
@@ -103,13 +104,43 @@ import { AxiosError } from '../../src/helpers/error'
 //   console.log(e.message)
 // })
 // 成功
-axios.get('/more/304',{
-  validateStatus(status){
-    return status >=200 && status < 400
+// axios.get('/more/304',{
+//   validateStatus(status){
+//     return status >=200 && status < 400
+//   }
+// }).then(res=>{
+//   console.log(res)
+// }).catch((e:AxiosError) => {
+//   console.log(e.message)
+// })
+
+//自定义参数序列化
+axios.get('/more/get',{
+  params: new URLSearchParams('a=b&c=d')
+}).then(res=>{
+  console.log(res)
+})
+axios.get('/more/get',{
+  params:{
+    a:1,
+    b:2,
+    c:['a','b','c']
   }
 }).then(res=>{
   console.log(res)
-}).catch((e:AxiosError) => {
-  console.log(e.message)
 })
 
+const instance = axios.create({
+  paramsSerializer(params){
+    return qs.stringify(params, { arrayFormat: 'brackets'})
+  }
+})
+instance.get('/more/get',{
+  params:{
+    a:1,
+    b:2,
+    c:['a','b','c']
+  }
+}).then(res=>{
+  console.log(res)
+})
