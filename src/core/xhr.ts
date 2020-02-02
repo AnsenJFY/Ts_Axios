@@ -4,6 +4,7 @@ import { createError } from '../helpers/error'
 import { isURLSameOrigin } from '../helpers/url'
 import { cookie } from '../helpers/cookie'
 import { isFormData } from '../helpers/utils'
+import btoa from 'btoa'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -19,7 +20,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfCookieName,
       xsrfHeaderName,
       onDownloadProgress,
-      onUploadProgress
+      onUploadProgress,
+      auth
     } = config
     // 创建一个 request 实例
     const request = new XMLHttpRequest()
@@ -102,6 +104,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         if (xsrfValue) {
           headers[xsrfHeaderName!] = xsrfValue
         }
+      }
+      // HTTP授权
+      if (auth) {
+        headers['Authorization'] = 'Basic ' + btoa(auth.username + ':' + auth.password)
       }
       // 判断Data类型 设置对应的headers
       Object.keys(headers).forEach(name => {

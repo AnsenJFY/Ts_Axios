@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const multipart = require('connect-multiparty')
+const atob = require('atob')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -187,11 +188,26 @@ function registerCancelRouter() {
 }
 
 function registerMoreRouter(){
+  // XSRF的安全防护
   router.get('/more/get',function(req,res){
     res.json(req.cookies)
   })
+  // 文件上传与下载
   router.post('/more/upload',function(req,res){
     console.log(req.body,req.files)
     res.end('upload success')
+  })
+  // HTTP授权
+  router.post('/more/post', function(req, res) {
+    const auth = req.headers.authorization
+    const [type, credentials] = auth.split(' ')
+    console.log(atob(credentials))
+    const [username, password] = atob(credentials).split(':')
+    if(type === 'Basic' && username === 'Ansen' && password === '123456'){
+      res.json(req.body)
+    }else{
+      res.status(401)
+      res.end('UnAuthorization')
+    }
   })
 }
