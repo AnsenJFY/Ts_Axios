@@ -1,5 +1,4 @@
 import { isPlainObject, deepMerge } from './utils'
-import { parse } from 'path'
 import { Method } from '../types'
 function nomalizeHeaderName(headers: any, nomalizeHeaderName: string): void {
   // 实现Content-Type大小写的规范化
@@ -38,7 +37,7 @@ export function processHeaders(headers: any, data: any): any {
 export function parseHeaders(headers: string): any {
   let parsed = Object.create(null)
   if (!headers) {
-    return parse
+    return parsed
   }
 
   headers.split('\r\n').forEach(line => {
@@ -50,6 +49,7 @@ export function parseHeaders(headers: string): any {
     let val = vals.join(':').trim()
     parsed[key] = val
   })
+
   return parsed
 }
 
