@@ -26,7 +26,7 @@ describe('helpers:url', () => {
 
     test('should ignore if the only value is null', () => {
       expect(
-        buildURL('foo', {
+        buildURL('/foo', {
           baz: null
         })
       ).toBe('/foo')
@@ -123,7 +123,7 @@ describe('helpers:url', () => {
 
   describe('combineURL', () => {
     test('should combine URL', () => {
-      expect(combineURL('https://api.github.com', '/users')).toBe('https://api.girhub.com/users')
+      expect(combineURL('https://api.github.com', '/users')).toBe('https://api.github.com/users')
     })
 
     test('should remove deplicate slashes', () => {
