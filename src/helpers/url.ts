@@ -19,13 +19,14 @@ function encode(val: string): string {
     .replace(/%5D/gi, ']')
 }
 
+// 构建URL
 export function buildURL(
   url: string,
   params?: any,
   paramsSerializer?: (params: any) => string
 ): string {
+  // 如果不存在参数 直接返回url
   if (!params) {
-    // 如果不存在参数 直接返回url
     return url
   }
   // 自定义参数序列化

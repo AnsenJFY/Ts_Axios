@@ -131,12 +131,14 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     function handleResponse(response: AxiosResponse): void {
+      console.log(!validateStatus)
+      console.log(validateStatus!(response.status))
       if (!validateStatus || validateStatus(response.status)) {
         resolve(response)
       } else {
         reject(
           createError(
-            `request fail with status code ${response.status}`,
+            `Request failed with status code ${response.status}`,
             config,
             null,
             request,

@@ -104,15 +104,15 @@ import qs from 'qs'
 //   console.log(e.message)
 // })
 // 成功
-// axios.get('/more/304',{
-//   validateStatus(status){
-//     return status >=200 && status < 400
-//   }
-// }).then(res=>{
-//   console.log(res)
-// }).catch((e:AxiosError) => {
-//   console.log(e.message)
-// })
+axios.get('/more/304',{
+  validateStatus(status){
+    return status >=200 && status < 400
+  }
+}).then(res=>{
+  console.log(res)
+}).catch((e:AxiosError) => {
+  console.log(e.message)
+})
 
 // //自定义参数序列化
 // axios.get('/more/get',{
@@ -155,34 +155,34 @@ import qs from 'qs'
 // instance.get('https://img.mukewang.com/szimg/5becd5ad0001b89306000338-360-202.jpg')
 
 // 静态方法拓展
-function getA() {
-  return axios.get('/more/A')
-}
+// function getA() {
+//   return axios.get('/more/A')
+// }
 
-function getB() {
-  return axios.get('/more/B')
-}
+// function getB() {
+//   return axios.get('/more/B')
+// }
 
-axios.all([getA(), getB()])
-  .then(axios.spread(function(resA, resB) {
-    console.log(resA.data)
-    console.log(resB.data)
-  }))
+// axios.all([getA(), getB()])
+//   .then(axios.spread(function(resA, resB) {
+//     console.log(resA.data)
+//     console.log(resB.data)
+//   }))
 
 
-axios.all([getA(), getB()])
-  .then(([resA, resB]) => {
-    console.log(resA.data)
-    console.log(resB.data)
-  })
+// axios.all([getA(), getB()])
+//   .then(([resA, resB]) => {
+//     console.log(resA.data)
+//     console.log(resB.data)
+//   })
 
-const fakeConfig = {
-  baseURL: 'https://www.baidu.com/',
-  url: '/user/12345',
-  params: {
-    idClient: 1,
-    idTest: 2,
-    testString: 'thisIsATest'
-  }
-}
-console.log(axios.getUri(fakeConfig))
+// const fakeConfig = {
+//   baseURL: 'https://www.baidu.com/',
+//   url: '/user/12345',
+//   params: {
+//     idClient: 1,
+//     idTest: 2,
+//     testString: 'thisIsATest'
+//   }
+// }
+// console.log(axios.getUri(fakeConfig))
